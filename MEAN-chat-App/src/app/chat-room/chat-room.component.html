@@ -1,0 +1,22 @@
+<div class="AllChatContainer">
+    <div class="ChatsContainer">
+    <mat-card *ngFor="let i of data|async" class="Chatroom">
+        <mat-card-header>
+         {{i.name}}
+        </mat-card-header>
+          <mat-card-content>
+              {{i.creator.name}}
+          </mat-card-content>
+          <mat-card-footer>
+              <button mat-raised-button color="accent" (click)="openChat(i._id)">open</button>
+              <div *ngIf="(i.creator._id==currentUser)">
+              <button  mat-raised-button color="warn" (click)="deleteChatroom(i)"> deleteChatroom</button>
+              </div>
+          </mat-card-footer>
+        </mat-card>
+        <div class="container">
+            <button mat-raised-button color="accent" (click)="openDialogue()">create new Chatroom</button>
+        </div>
+    </div>
+   
+</div>

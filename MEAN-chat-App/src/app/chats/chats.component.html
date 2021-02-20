@@ -1,0 +1,17 @@
+<div class="container">
+    <div *ngFor="let chat of AllChats|async;let i=index">
+<div class="Chats">
+    {{chat.senderID}} and {{user}}
+<span class="chat-header"><h4 style="color:lawngreen;"> {{chat.sender}}</h4>  <mat-icon *ngIf="user==chat.senderID"style="margin-left:5rem;align-self: flex-end;" (click)="removeChat(chat)">cancel</mat-icon></span> 
+
+<div>
+ {{chat.message}}
+ </div>
+</div>
+</div>
+</div>    
+<div class="my-input-form">
+    <input class="my-input" [(ngModel)]="message" [ngModelOptions]="{standalone: true}"/>
+    
+    <button mat-raised-button color="success" class="my-input-button" type="submit" (click)="sendMessage()">send</button>
+</div>

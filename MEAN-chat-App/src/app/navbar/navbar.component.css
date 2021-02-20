@@ -1,0 +1,21 @@
+.my-nav{
+   color: blue;
+}
+.nav-list{
+   display: inline-flex;
+   list-style-type: none;
+   color: blueviolet;
+   align-content: space-between;  
+   margin-right: 30rem;
+}
+.nav-list-items{
+   margin-left: 2rem;
+   padding:none;
+}
+.nav-list-right{
+   display: inline-flex;
+   color: blueviolet;
+   list-style-type:none;
+   margin-left: 30rem;
+   align-items: flex-end;  
+}

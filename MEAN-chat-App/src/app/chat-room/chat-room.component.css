@@ -1,0 +1,19 @@
+.AllChatContainer{
+  padding: 1%;
+  margin:1%;
+  display:block;
+  max-width:initial;
+  align-items: center;
+  align-content: center;
+}
+.ChatsContainer{   
+  display:contents;
+  max-width:40%;
+  margin:0%;
+  overflow: hidden;
+}
+.Chatroom{
+  background-color: rgba(220, 236, 213, 0.884);
+  color:blueviolet;
+  margin:1%;
+}

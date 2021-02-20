@@ -1,0 +1,45 @@
+.container{
+
+    width: 100%;
+    max-height: 80%;
+    height: 80%;
+    overflow-y: scroll;
+    align-items: baseline;
+    scroll-behavior: smooth;
+}
+.my-input{
+    width: 90%;
+    background-color: white;
+    padding: 0.25%;
+}
+.my-input-form{
+    width: 100%;
+    margin:1%;
+    height: 20%;
+    max-height: 20%;
+    padding: none;  
+    display: inline;
+}
+.my-input-button{
+    margin-left: 0.1%;
+}
+.Chats{
+    background-color:slategray;
+    color:yellow;
+    margin: 2%;
+    max-width: 40%;
+    width: fit-content;
+    padding: 1%;
+    /* border-radius:20%; */
+}
+.senderChats{
+    background-color: white;
+    color: blueviolet;
+    margin: 2%;
+    max-width: 40%;
+    padding: 1%;
+
+}
+.chat-header{
+    display: inline-flex;
+}

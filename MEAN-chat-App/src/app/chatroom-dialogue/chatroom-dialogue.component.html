@@ -1,0 +1,11 @@
+<h1 mat-dialogue-title> Create New Chatroom</h1>
+<div mat-dialogue-content>
+      <mat-form-field>
+          <mat-label>Chatroom Name</mat-label>
+          <input matInput [(ngModel)]="data">
+          </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">No Thanks</button>
+        <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial color="accent">Ok</button>
+      </div>

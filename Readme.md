@@ -1,0 +1,1 @@
+This Application is a demo Application , Demonstration about NODE JS , MONGODB, GRAPHQL and ANGULAR 
