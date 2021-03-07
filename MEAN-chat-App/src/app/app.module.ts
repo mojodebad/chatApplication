@@ -7,9 +7,7 @@ import { AuthComponent } from './auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MatCardModule} from "@angular/material/card";
-import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatButtonToggleModule} from "@angular/material/button-toggle"
-import {MatRadioModule} from "@angular/material/radio";
 import { FormsModule } from '@angular/forms';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
@@ -19,6 +17,9 @@ import { ChatsComponent } from './chats/chats.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ChatroomDialogueComponent } from './chatroom-dialogue/chatroom-dialogue.component';
 import {MatDialogModule} from "@angular/material/dialog"
+import {APOLLO_OPTIONS} from "apollo-angular";
+import {HttpLink} from "apollo-angular/http";
+import {InMemoryCache} from "@apollo/client/core";
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -42,7 +43,19 @@ import {MatDialogModule} from "@angular/material/dialog"
     BrowserAnimationsModule,
     MatFormFieldModule
   ],
-  providers: [],
+  providers: [
+    {provide:APOLLO_OPTIONS,
+    useFactory:(httpLink:HttpLink)=>{
+      return{
+        cache:new InMemoryCache(),
+        link:httpLink.create({
+          uri:"api/"
+        })
+      }
+    },
+  deps:[HttpLink]
+  }
+  ],
   entryComponents:[ChatroomDialogueComponent],
   bootstrap: [AppComponent]
 })

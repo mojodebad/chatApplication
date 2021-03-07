@@ -1,7 +1,7 @@
 const User = require("./models/User").User;
 const bcrypt = require("bcrypt");
 const salt = require("./utils/utils").salt;
-const io= require("socket.io");
+const io = require("socket.io");
 const validator = require("validator");
 const mongoose = require("mongoose");
 const { ChatRoom, Chat } = require("./models/chatroom");
@@ -57,19 +57,21 @@ const createChatRoom = async (args) => {
     const chatroom = new ChatRoom({ name: args.croom.name, creator: mongoose.Types.ObjectId(args.croom.creator.toString()), chats: [] });
     await chatroom.save();
     let data = await chatroom.populate("creator").execPopulate();
-    if(data!=null){
-          io.on('connection',(socket)=>{
-            
-            io.emit("created Chatroom",JSON.stringify({"data":{
-                "_id": data._id,
-                "name": data._doc.name,
-                "creator": data._doc.creator,
-                "chats": []
-            }}));
+    if (data != null) {
+        io.on('connection', (socket) => {
 
-          })
- 
-        
+            io.emit("created Chatroom", JSON.stringify({
+                "data": {
+                    "_id": data._id,
+                    "name": data._doc.name,
+                    "creator": data._doc.creator,
+                    "chats": []
+                }
+            }));
+
+        })
+
+
     }
     return {
         _id: data._id,
@@ -133,27 +135,27 @@ const removeChat = async ({ id }) => {
     }
 
 }
-const removeChatRoom=async({id})=>{
+const removeChatRoom = async ({ id }) => {
     console.log(id);
     // let objId=new Obj
-    try{
-    const croom=await ChatRoom.findOne({"_id":mongoose.Types.ObjectId(id)}).populate({model:"Chat",path:"chats"});
-   let testData=croom.chats.map(c=>mongoose.Types.ObjectId(c._id));
-   console.log(testData);
+    try {
+        const croom = await ChatRoom.findOne({ "_id": mongoose.Types.ObjectId(id) }).populate({ model: "Chat", path: "chats" });
+        let testData = croom.chats.map(c => mongoose.Types.ObjectId(c._id));
+        console.log(testData);
 
-        await croom.chats.pull();  
-        await Chat.deleteMany({"_id":{"$in":testData}});    
-  
-    let data=await ChatRoom.deleteOne({"_id":mongoose.Types.ObjectId(id)});
-    if(data){
-        return true
+        await croom.chats.pull();
+        await Chat.deleteMany({ "_id": { "$in": testData } });
+
+        let data = await ChatRoom.deleteOne({ "_id": mongoose.Types.ObjectId(id) });
+        if (data) {
+            return true
+        }
+        else {
+            return false
+        }
     }
-    else{
+    catch (err) {
         return false
-    }
-}
-    catch(err){
-      return false
     }
 
 }
@@ -168,4 +170,22 @@ module.exports = {
     getAllChatRoom: getAllChatRoom,
     getAllChats: getAllChats,
     removeChatRoom:removeChatRoom
+    // Query: {
+    //     rootQuery: {
+    //         hello: hello,
+    //         getAllChatRoom: getAllChatRoom,
+    //         getUsers: getUsers,
+    //         getAllChats: getAllChats,
+    //         Login: Login
+    //     }
+    // },
+    // mutation: {
+    //     rootMutation: {
+    //         createChatRoom: createChatRoom,
+    //         enterChat: enterChat,
+    //         removeChat: removeChat,
+    //         Signup: Signup,
+    //         removeChatRoom: removeChatRoom
+    //     }
+    // }
 }
